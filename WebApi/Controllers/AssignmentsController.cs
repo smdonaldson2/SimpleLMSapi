@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+//using WebApi.Repositories;
+
 
 namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    public class AssignmentsController : ControllerBase
+    {
     private readonly List<Assignment> _assignments = new List<Assignment>();
 
     // GET api/assignments
@@ -42,7 +46,7 @@ namespace WebApi.Controllers
 
     // PUT api/assignments/5
     [HttpPut("{id}")]
-    public IActionResult Put(int id, Assignment updatedAssignment)
+    public ActionResult Put(int id, Assignment updatedAssignment)
     {
         var assignment = _assignments.FirstOrDefault(a => a.ID == id);
         if (assignment == null)
@@ -59,7 +63,7 @@ namespace WebApi.Controllers
 
     // DELETE api/assignments/5
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public ActionResult Delete(int id)
     {
         var assignment = _assignments.FirstOrDefault(a => a.ID == id);
         if (assignment == null)
@@ -71,4 +75,6 @@ namespace WebApi.Controllers
 
         return NoContent();
     }
+    }
+
 }

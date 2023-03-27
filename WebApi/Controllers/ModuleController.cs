@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+//using WebApi.Repositories;
+
+
 namespace WebApi.Controllers
 {
     [ApiController]
@@ -40,11 +43,11 @@ namespace WebApi.Controllers
         public ActionResult<Module> Post(Module module)
         {
             _modules.Add(module);
-            return CreatedAction(nameof(Get),new {id = module.ID}, module);
+            return CreatedAtAction(nameof(Get),new {id = module.ID}, module);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put (int id, Module module)
+        public ActionResult Put (int id, Module module)
         {
             var existingModule = _modules.Find(m => m.ID == id);
 
@@ -61,7 +64,7 @@ namespace WebApi.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             var module = _modules.Find(m => m.ID == id);
 
@@ -72,7 +75,7 @@ namespace WebApi.Controllers
 
             _modules.Remove(module);
 
-            return NoContext();
+            return NoContent();
         }
 
         

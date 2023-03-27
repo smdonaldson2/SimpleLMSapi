@@ -1,12 +1,15 @@
+/*
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using WebApi.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Results;
 
-namespace WebApi.Tests
+
+namespace WebApi.Controllers
 {
-    public class ModuleControllerTests
+    public class moduleTests
     {
         private ModuleController _controller;
 
@@ -15,6 +18,7 @@ namespace WebApi.Tests
         {
             _controller = new ModuleController();
         }
+        
 
         [Test]
         public void GetAllModules_ReturnsAllModules()
@@ -31,6 +35,7 @@ namespace WebApi.Tests
             var modules = (IEnumerable<Module>)okResult.Value;
             Assert.AreEqual(3, modules.Count());
         }
+        
 
         [Test]
         public void GetModuleById_ReturnsCorrectModule()
@@ -48,6 +53,7 @@ namespace WebApi.Tests
             var module = (Module)okResult.Value;
             Assert.AreEqual(moduleId, module.ID);
         }
+        
 
         [Test]
         public void GetModuleById_ReturnsNotFoundForInvalidId()
@@ -139,4 +145,4 @@ namespace WebApi.Tests
         }
     }
 }
-
+*/

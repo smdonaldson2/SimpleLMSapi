@@ -1,20 +1,24 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Microsoft.AspNetCore.Mvc;
+using WebApi.Controllers;
 
-namespace WebApi
+
+namespace WebApi.Controllers
 {
     [TestFixture]
     public class courseTests
     {
-        private CourseController _courseController;
+        private CourseController _controller;
 
         [SetUp]
         public void SetUp()
         {
-            _courseController = new CourseController();
+            _controller = new CourseController();
         }
 
         [Test]
@@ -23,7 +27,7 @@ namespace WebApi
             // Arrange
 
             // Act
-            var result = _courseController.Get();
+            var result = _controller.Get();
 
             // Assert
             Assert.IsInstanceOf<IEnumerable<Course>>(result.Value);
@@ -34,10 +38,10 @@ namespace WebApi
         public void Get_WithValidId_ReturnsCorrectCourse()
         {
             // Arrange
-            var expectedCourse = _courseController.Get(2).Value;
+            var expectedCourse = _controller.Get(2).Value;
 
             // Act
-            var result = _courseController.Get(2).Value;
+            var result = _controller.Get(2).Value;
 
             // Assert
             Assert.AreEqual(expectedCourse.ID, result.ID);
@@ -51,7 +55,7 @@ namespace WebApi
             // Arrange
 
             // Act
-            var result = _courseController.Get(99);
+            var result = _controller.Get(99);
 
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result.Result);
@@ -64,12 +68,12 @@ namespace WebApi
             var courseToAdd = new Course { ID = 4, Name = "Course 4", Modules = new List<Module>() };
 
             // Act
-            var result = _courseController.Post(courseToAdd);
+            var result = _controller.Post(courseToAdd);
 
             // Assert
             Assert.IsInstanceOf<CreatedAtActionResult>(result.Result);
-            Assert.AreEqual(4, _courseController.Get().Value.Count());
-            Assert.IsTrue(_courseController.Get().Value.Contains(courseToAdd));
+            Assert.AreEqual(4, _controller.Get().Value.Count());
+            Assert.IsTrue(_controller.Get().Value.Contains(courseToAdd));
         }
 
         [Test]
@@ -79,12 +83,12 @@ namespace WebApi
             var courseToUpdate = new Course { ID = 2, Name = "Updated Course 2", Modules = new List<Module>() };
 
             // Act
-            var result = _courseController.Put(2, courseToUpdate);
+            var result = _controller.Put(2, courseToUpdate);
 
             // Assert
             Assert.IsInstanceOf<NoContentResult>(result);
-            Assert.AreEqual(courseToUpdate.Name, _courseController.Get(2).Value.Name);
-            Assert.AreEqual(courseToUpdate.Modules.Count(), _courseController.Get(2).Value.Modules.Count());
+            Assert.AreEqual(courseToUpdate.Name, _controller.Get(2).Value.Name);
+            Assert.AreEqual(courseToUpdate.Modules.Count(), _controller.Get(2).Value.Modules.Count());
         }
 
         [Test]
@@ -94,7 +98,7 @@ namespace WebApi
             var courseToUpdate = new Course { ID = 99, Name = "Updated Course 99", Modules = new List<Module>() };
 
             // Act
-            var result = _courseController.Put(99, courseToUpdate);
+            var result = _controller.Put(99, courseToUpdate);
 
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result);
@@ -106,12 +110,12 @@ namespace WebApi
             // Arrange
 
             // Act
-            var result = _courseController.Delete(2);
+            var result = _controller.Delete(2);
 
             // Assert
             Assert.IsInstanceOf<NoContentResult>(result);
-            Assert.AreEqual(2, _courseController.Get().Value.Count());
-            Assert.IsNull(_courseController.Get(2).Value);
+            Assert.AreEqual(2, _controller.Get().Value.Count());
+            Assert.IsNull(_controller.Get(2).Value);
         }
 
         [Test]
@@ -120,7 +124,7 @@ namespace WebApi
             // Arrange
 
             // Act
-            var result = _courseController.Delete(99);
+            var result = _controller.Delete(99);
 
             // Assert
             Assert.IsInstanceOf<NotFoundResult>(result);

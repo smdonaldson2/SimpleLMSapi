@@ -1,19 +1,24 @@
+
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi.Controllers;
+using System.Threading.Tasks;
 
-namespace WebApi
+
+namespace WebApi.Controllers
 {
-    public class assignmentTestTests
+    [TestFixture]
+    public class assignmentTest
     {
-        private assignmentTest _controller;
+        private AssignmentsController _controller;
 
         [SetUp]
         public void Setup()
         {
-            _controller = new assignmentTest();
+            _controller = new AssignmentsController();
         }
 
         [Test]

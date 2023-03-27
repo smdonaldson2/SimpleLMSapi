@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+//using WebApi.Repositories;
 
 namespace WebApi.Controllers
 {
@@ -46,7 +46,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Course course)
+        public ActionResult Put(int id, Course course)
         {
             var existingCourse = _courses.Find(c => c.ID == id);
 
@@ -62,7 +62,7 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             var course = _courses.Find(c => c.ID == id);
 
